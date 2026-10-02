@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# Xcode user-specific data
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad
+
+# Swift Package Manager build artifacts
+.build/
+
+# Derived data
+DerivedData/
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager resolved file (optional for apps, kept out here)
+# Package.resolved
+
+# CocoaPods / Carthage / SwiftPM checkouts
+Pods/
+Carthage/Build/
+.swiftpm/

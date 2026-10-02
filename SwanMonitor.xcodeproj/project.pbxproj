@@ -6,6 +6,12 @@
 	objectVersion = 110;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8FCE7AA6306EAE3700DFB056 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8FCE7AA5306EAE3700DFB056 /* NukeUI */; };
+		8FCE7AA8306EAE3C00DFB056 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 8FCE7AA7306EAE3C00DFB056 /* Nuke */; };
+		8FDDB644306D61AB001B8F91 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8FDDB643306D61AB001B8F91 /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		8FDDB61D306D263C001B8F91 /* SwanMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwanMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -22,15 +28,26 @@
 		8FDDB61A306D263C001B8F91 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				8FCE7AA8306EAE3C00DFB056 /* Nuke in Frameworks */,
+				8FDDB644306D61AB001B8F91 /* Alamofire in Frameworks */,
+				8FCE7AA6306EAE3700DFB056 /* NukeUI in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8FCE7AA4306EAE3700DFB056 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8FDDB614306D263C001B8F91 = {
 			isa = PBXGroup;
 			children = (
 				8FDDB61F306D263C001B8F91 /* SwanMonitor */,
+				8FCE7AA4306EAE3700DFB056 /* Frameworks */,
 				8FDDB61E306D263C001B8F91 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +77,11 @@
 				8FDDB61F306D263C001B8F91 /* SwanMonitor */,
 			);
 			name = SwanMonitor;
+			packageProductDependencies = (
+				8FDDB643306D61AB001B8F91 /* Alamofire */,
+				8FCE7AA5306EAE3700DFB056 /* NukeUI */,
+				8FCE7AA7306EAE3C00DFB056 /* Nuke */,
+			);
 			productName = SwanMonitor;
 			productReference = 8FDDB61D306D263C001B8F91 /* SwanMonitor.app */;
 			productType = "com.apple.product-type.application";
@@ -84,10 +106,15 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 				Base,
 			);
 			mainGroup = 8FDDB614306D263C001B8F91;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8FDDB642306D61AB001B8F91 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8FDDB647306D6226001B8F91 /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8FDDB61E306D263C001B8F91 /* Products */;
 			projectDirPath = "";
@@ -244,6 +271,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "使用 Face ID 解锁 SwanMonitor";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -288,6 +316,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "使用 Face ID 解锁 SwanMonitor";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -339,6 +368,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8FDDB642306D61AB001B8F91 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.12.2;
+			};
+		};
+		8FDDB647306D6226001B8F91 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8FCE7AA5306EAE3700DFB056 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8FDDB647306D6226001B8F91 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+		8FCE7AA7306EAE3C00DFB056 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8FDDB647306D6226001B8F91 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		8FDDB643306D61AB001B8F91 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8FDDB642306D61AB001B8F91 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8FDDB615306D263C001B8F91 /* Project object */;
 	validationLevel = 1;

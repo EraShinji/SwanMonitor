@@ -1,82 +1,37 @@
-//
-//  ContentView.swift
-//  SwanMonitor
-//
-//  Created by aleclanned on 9/30/26.
-//
-
 import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var sessions: [SessionModel]
+    @Environment(AppLock.self) private var appLock
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
-        NavigationViewWrapper {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        ZStack {
+            if sessions.first?.isAuthenticated == true {
+                MainView()
+                    .disabled(appLock.isLocked)
+                    .accessibilityHidden(appLock.isLocked)
+                if appLock.isLocked {
+                    PINView(unlocking: true)
                 }
-                .onDelete(perform: deleteItems)
+            } else {
+                LandingPageView()
             }
-#if os(macOS)
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-#endif
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+            // 同时遮住后台快照，避免切换应用时暴露页面内容。
+            if scenePhase != .active {
+                Color(.systemBackground).ignoresSafeArea()
             }
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background { appLock.enteredBackground() }
+            if phase == .active { appLock.becameActive() }
         }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
-}
-
-fileprivate struct NavigationViewWrapper<Content: View>: View {
-    let content: () -> Content
-
-    var body: some View {
-#if os(macOS)
-        NavigationSplitView {
-            content()
-        } detail: {
-            Text("Select an item")
-        }
-#else
-        NavigationStack {
-            content()
-        }
-#endif
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .environment(AppLock())
+        .modelContainer(for: [SessionModel.self, UserModel.self], inMemory: true)
 }
