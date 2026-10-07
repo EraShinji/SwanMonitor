@@ -68,12 +68,6 @@ struct PINView: View {
                     .accessibilityLabel("PIN")
                     .accessibilityValue("已输入 \(pin.count) 位，共 6 位")
 
-                    Text(error.isEmpty ? String(localized: "输入满 6 位后自动继续") : error)
-                        .font(.footnote)
-                        .foregroundStyle(error.isEmpty ? Color.secondary : Color.red)
-                        .multilineTextAlignment(.center)
-                        .frame(minHeight: 36)
-
                     Spacer(minLength: 0)
 
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 16) {

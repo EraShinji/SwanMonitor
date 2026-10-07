@@ -58,7 +58,7 @@ struct HomeView: View {
         VStack(spacing: 24) {
             HStack(spacing: 12) {
                 statistic(String(localized: "正在进行"), count: experiments.filter { TrainingStatus($0.run.state) == .running }.count,
-                          symbol: "waveform.path", color: .blue)
+                          symbol: "play.fill", color: .blue)
                 statistic(String(localized: "今日已完成"), count: experiments.filter {
                     TrainingStatus($0.run.state) == .finished && $0.finished.map { calendar.isDate($0, inSameDayAs: now) } == true
                 }.count, symbol: "checkmark.seal.fill", color: .green)
@@ -97,7 +97,7 @@ struct HomeView: View {
         let count = counts[selection, default: 0]
         return VStack(alignment: .leading, spacing: 18) {
             HStack(alignment: .firstTextBaseline) {
-                Text(String(localized: "实验热力图")).font(.headline)
+                Text(String(localized: "实验")).font(.headline)
                 Spacer()
                 Text(now, format: .dateTime.year().month()).font(.caption).foregroundStyle(.secondary)
             }
@@ -129,11 +129,11 @@ struct HomeView: View {
                 }
             }
             HStack(spacing: 5) {
-                Text(String(localized: "少"))
+                Text(String(localized: "0"))
                 ForEach(0..<5) { level in
                     RoundedRectangle(cornerRadius: 3).fill(heatColor(level, maximum: 4)).frame(width: 14, height: 14)
                 }
-                Text(String(localized: "多"))
+                Text(String(localized: "Max"))
                 Spacer()
                 Text(String(localized: "每日提交数量"))
             }
@@ -155,7 +155,7 @@ struct HomeView: View {
             HStack {
                 Text(String(localized: "最近提交")).font(.title3.bold())
                 Spacer()
-                Text("最近 \(recent.count) 条").font(.caption).foregroundStyle(.secondary)
+                
             }
             if recent.isEmpty {
                 ContentUnavailableView(String(localized: "暂无实验"), systemImage: "flask", description: Text(String(localized: "提交实验后，即可在这里查看训练动态。")))
@@ -174,7 +174,7 @@ struct HomeView: View {
     private func experimentCard(_ item: HomeExperiment) -> some View {
         let status = TrainingStatus(item.run.state)
         let color: Color = status == .finished ? .green : status == .running ? .blue : status == .stopped ? .red : .gray
-        let symbol = status == .finished ? "checkmark" : status == .running ? "waveform.path" : status == .stopped ? "xmark" : "questionmark"
+        let symbol = status == .finished ? "checkmark" : status == .running ? "play.fill" : status == .stopped ? "xmark" : "questionmark"
         return VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
                 Image(systemName: symbol).font(.headline).foregroundStyle(color)
